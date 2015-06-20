@@ -2,6 +2,10 @@
 
 class UserController extends BaseController {
 
+    function __construct(){
+        View::share('root', URL::to('/'));
+    }
+
     function userSection(){
         return View::make('users.user-section');
     }

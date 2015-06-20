@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration {
             $table->increments('id');
 
             $table->string('name', 255);
+            $table->string('description', 1000);
             $table->integer('created_by')->unsigned();
             $table->string('status', 50);
 
@@ -33,10 +34,6 @@ class CreateProjectsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('projects', function(Blueprint $table)
-		{
-			//
-		});
 	}
 
 }

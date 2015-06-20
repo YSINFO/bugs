@@ -2,8 +2,18 @@
 
 class BugController extends BaseController {
 
+    function __construct(){
+        View::share('root', URL::to('/'));
+    }
+
     function createBug(){
-        return View::make('bugs.create');
+
+        $projectId = Session::get('currentProject');
+
+        if(isset($projectId))
+            return View::make('bugs.create')->with('projectId', $projectId);
+        else
+            return Redirect::to('/');
     }
 
     function saveBug(){
@@ -12,8 +22,8 @@ class BugController extends BaseController {
 
         $bug->title = Input::get('title');
         $bug->description = Input::get('description');
-        $bug->created_by = Session::get('userId');
-        $bug->project_id = Input::get('project_id');
+        $bug->created_by = 1; //Session::get('userId');
+        $bug->project_id = Session::get('currentProject');
         $bug->status = 'active';
 
         $bug->save();
@@ -59,9 +69,13 @@ class BugController extends BaseController {
 
     function listBugs($projectId){
 
-        $bugs = Bug::where('project_id', '=', $projectId)->get();
+        if(isset($projectId)){
+            $bugs = Bug::where('project_id', '=', $projectId)->get();
 
-        return View::make('bugs.list')->with('bugs', $bugs);
+            return View::make('bugs.list')->with('bugs', $bugs);
+        }
+        else
+            return Redirect::to('/');
     }
 
     function addBugComment(){
@@ -78,19 +92,53 @@ class BugController extends BaseController {
         echo 'done';
     }
 
-    /****************** json methods ***********************/
+    function listBugComments($bugId){
 
-    function dataListBugs($projectId){
+        if(isset($bugId)){
+            Session::put('bugId', $bugId);
 
-        $bugs = Bug::where('project_id', '=', $projectId)->get();
+            $projectId = Session::get('currentProject');
 
-        return $bugs;
+            if(isset($projectId))
+                return View::make('bugs.list-comments')->with('projectId', $projectId);
+            else
+                return Redirect::to('/');
+        }
+        else
+            return Redirect::to('/');
     }
 
-    function dataListBugComments($bugId){
+    /****************** json methods ***********************/
 
-        $comments = BugComment::where('bug_id', '=', $bugId)->get();
+    function dataListBugs(){
 
-        return $comments;
+        $projectId = Session::get('currentProject');
+
+        if(isset($projectId)){
+            $bugs = Bug::where('project_id', '=', $projectId)->get();
+
+            if($bugs && count($bugs)>0)
+                return json_encode(array('found' => true, 'bugs' => $bugs->toArray()));
+            else
+                return json_encode(array('found' => false));
+        }
+        else
+            return json_encode(array('found' => false));
+    }
+
+    function dataListBugComments(){
+
+        $bugId = Session::get('currentBug');
+
+        if(isset($bugId)){
+            $comments = Bug::where('bug_id', '=', $bugId)->get();
+
+            if($comments && count($comments)>0)
+                return json_encode(array('found' => true, 'comments' => $comments->toArray()));
+            else
+                return json_encode(array('found' => false));
+        }
+        else
+            return json_encode(array('found' => false));
     }
 }

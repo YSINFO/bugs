@@ -6,11 +6,12 @@
         Administrator Section
     </title>
 
-    {{HTML::style(asset("/public/css/login.css"))}}
+    {{HTML::style(asset("/public/css/projects/edit.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
+    {{HTML::script(asset("/public/js/projects/edit.js"))}}
 
-    </head>
+</head>
 <body>
 <div>
 

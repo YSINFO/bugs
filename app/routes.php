@@ -11,33 +11,31 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('index');
-});
+Route::get('/', 'HomeController@home');
 
-Route::post('/check-login', 'AuthenticationController@checkLogin');
+Route::post('/is-valid-user', 'AuthenticationController@isValidUser');
 
-Route::post('/user-section', 'UserController@userSection');
-Route::post('/create-user', 'UserController@createUser');
+Route::get('/user-section', 'UserController@userSection');
+Route::get('/create-user', 'UserController@createUser');
 Route::post('/save-user', 'UserController@saveUser');
 Route::post('/is-duplicate-user', 'UserController@isDuplicateUser');
-Route::post('/list-users', 'UserController@listUsers');
+Route::get('/list-users', 'UserController@listUsers');
 
-Route::post('/create-project', 'ProjectController@createProject');
-Route::post('/save-project/{id}', 'ProjectController@saveProject');
-Route::post('/edit-project/{id}', 'ProjectController@editProject');
+Route::get('/create-project', 'ProjectController@createProject');
+Route::post('/save-project', 'ProjectController@saveProject');
+Route::get('/edit-project/{id}', 'ProjectController@editProject');
 Route::post('/update-project', 'ProjectController@updateProject');
-Route::post('/list-projects', 'ProjectController@listProjects');
+Route::get('/list-projects', 'ProjectController@listProjects');
 
-Route::post('/create-bug', 'ProjectController@createBug');
-Route::post('/save-bug/{id}', 'ProjectController@saveBug');
-Route::post('/edit-bug/{id}', 'ProjectController@editBug');
-Route::post('/update-bug', 'ProjectController@updateBug');
-Route::post('/list-bugs', 'ProjectController@listBugs');
-Route::post('/add-bug-comment', 'ProjectController@addBugComment');
+Route::get('/create-bug', 'BugController@createBug');
+Route::post('/save-bug', 'BugController@saveBug');
+Route::get('/edit-bug/{id}', 'BugController@editBug');
+Route::post('/update-bug', 'BugController@updateBug');
+Route::get('/list-bugs/{id}', 'BugController@listBugs');
+Route::post('/add-bug-comment', 'BugController@addBugComment');
+Route::get('/list-bug-comments/{id}', 'BugController@listBugComments');
 
-Route::post('/data-list-projects', 'ProjectController@dataListProjects');
-Route::post('/data-list-bugs/{id}', 'BugController@dataListBugs');                  // id => project id
-Route::post('/data-list-bug-comments/{id}', 'BugController@dataListBugComments');   // id => bug id
-Route::post('/data-list-users', 'UserController@dataListUsers');
+Route::get('/data-list-projects', 'ProjectController@dataListProjects');
+Route::get('/data-list-bugs', 'BugController@dataListBugs');                  // id => project id
+Route::get('/data-list-bug-comments/{id}', 'BugController@dataListBugComments');   // id => bug id
+Route::get('/data-list-users', 'UserController@dataListUsers');

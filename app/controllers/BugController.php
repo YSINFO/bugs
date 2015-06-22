@@ -29,7 +29,7 @@ class BugController extends BaseController {
 
         $bug->save();
 
-        echo 'done';
+        echo 'Bug created successfully';
     }
 
     function editBug($id){

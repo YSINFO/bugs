@@ -53,11 +53,13 @@ function getBugTable(data){
             str += '<td>' + bug.description + '</td>';
 
             str += '<td>';
-            str += '<a href="' + root + 'list-bug-comments/' + bug.id + '">View comments</a>';
+            str += '<a href="' + root + 'list-bug-comments/' + bug.id + '" title="View comments"><img class="icon" src="' + root + 'public/images/view-comments.png"/></a>';
             str += '&nbsp;&nbsp;&nbsp;';
-            str += '<a href="#">Add comment</a>';
             str += '&nbsp;&nbsp;&nbsp;';
-            str += '<a href="' + root + 'list-bugs/' + bug.id + '">Change status</a>';
+            str += '<a href="#" title="Add comment"><img class="icon" src="' + root + 'public/images/add-comment.png"/></a>';
+            str += '&nbsp;&nbsp;&nbsp;';
+            str += '&nbsp;';
+            str += '<a href="' + root + 'list-bugs/' + bug.id + '" title="Change status"><img class="icon" src="' + root + 'public/images/change-status.jpg"/></a>';
             str += '</td>';
 
             str += '</tr>';

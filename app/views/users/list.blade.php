@@ -7,14 +7,13 @@
     </title>
 
     {{HTML::style(asset("/public/css/jquery.dataTables.css"))}}
-    {{HTML::style(asset("/public/css/common.css"))}}
     {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
-    {{HTML::style(asset("/public/css/bugs/list.css"))}}
+    {{HTML::style(asset("/public/css/projects/list.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
     {{HTML::script(asset("/public/js/jquery.dataTables.min.js"))}}
     {{HTML::script(asset("/public/js/common.js"))}}
-    {{HTML::script(asset("/public/js/bugs/list.js"))}}
+    {{HTML::script(asset("/public/js/users/list.js"))}}
 
 </head>
 <body>
@@ -25,12 +24,7 @@
         @include('includes.header')
 
         <div class="header">
-            <div>
-                <a href="{{$root}}/create-bug">Create bug</a>
-            </div>
-            <br/>
-            <h1>Bug list</h1>
-            <br/>
+            <h1>Users in system</h1>
         </div>
 
         <div id="table-data"></div>

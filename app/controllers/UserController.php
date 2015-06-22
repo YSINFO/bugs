@@ -98,9 +98,7 @@ class UserController extends BaseController {
     }
 
     function listUsers(){
-        $users = User::all();
-
-        return View::make('users.user-section')->with('users', $users);
+        return View::make('users.list');
     }
 
 
@@ -109,6 +107,9 @@ class UserController extends BaseController {
     function dataListUsers(){
         $users = User::all();
 
-        return $users;
+        if(isset($users))
+            return json_encode(array('found' => true, 'users' => $users->toArray()));
+        else
+            return json_encode(array('found' => true));
     }
 }

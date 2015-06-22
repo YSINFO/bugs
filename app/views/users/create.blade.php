@@ -11,7 +11,7 @@
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
     {{HTML::script(asset("/public/js/common.js"))}}
-    {{HTML::script(asset("/public/js/bugs/create.js"))}}
+    {{HTML::script(asset("/public/js/users/profile.js"))}}
 
 </head>
 <body>
@@ -21,29 +21,47 @@
 
         @include('includes.header')
 
-        <form id="form-bug" class="admin-section-form frm">
+        <form id="user-profile" class="admin-section-form frm">
 
             <div class="header">
-                <div>
-                    <a href="{{$root}}/list-bugs/{{$projectId}}">View all bugs</a> <br/>
-                </div>
-
                 <br/>
-                <h1>Create bug</h1>
+                <h1>Update your profile</h1>
                 <br/>
             </div>
 
             <div class="content">
-                <input name="title" class="input" placeholder="Bug title" type="text"/>
 
-                <div class="user-icon"></div>
-                <textarea name="description" class="input" placeholder="Description of bug"></textarea>
+                <div class="form-row">
+                    <input name="email" class="input" placeholder="Email" type="text" value="{{$user->email}}"/>
+                </div>
 
-                <div class="pass-icon"></div>
+                <div class="form-row">
+                    <input name="name" class="input" placeholder="Name" type="text" value="{{$user->name}}"/>
+                </div>
+
+                <div class="form-row">
+                    <input name="password" class="input" placeholder="Password" type="password" value="{{$user->password}}"/>
+                </div>
+
+                <div class="form-row">
+                    <input name="confirm-password" class="input" placeholder="Confirm password" type="password" value="{{$user->password}}"/>
+                </div>
+
+                <div class="form-row">
+                    <select name="user_type">
+                        <option>Administrator</option>
+                        <option>Guest</option>
+                        <option>User</option>
+                    </select>
+                </div>
+
+                <script>
+                    $("select[name='user_type']").val("{{$user->user_type}}");
+                </script>
             </div>
 
             <div class="footerlogin">
-                <input class="button" name="btn-create-bug" value="Create" type="button"/>
+                <input class="button" name="btn-update-profile" value="Update" type="button"/>
 
                 <div class="message" style="font-weight: bold; padding-top:16px;">&nbsp;</div>
             </div>

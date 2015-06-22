@@ -8,6 +8,7 @@ Welcome : {{$name}} <br/><br/><br/>
 <ul id="mainNav">
     <li><a href="{{$root}}/user-section">DASHBOARD</a></li>
     <li><a href="{{$root}}/list-projects">PROJECTS</a></li>
+    <li><a href="{{$root}}/list-users">USERS</a></li>
     <li><a href="{{$root}}/profile">PROFILE</a></li>
     <li class="logout"><a href="{{$root}}/logout">LOGOUT</a></li>
 </ul>

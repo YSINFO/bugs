@@ -46,18 +46,6 @@
                 <div class="form-row">
                     <input name="confirm-password" class="input" placeholder="Confirm password" type="password" value="{{$user->password}}"/>
                 </div>
-
-                <div class="form-row">
-                    <select name="user_type">
-                        <option>Administrator</option>
-                        <option>Guest</option>
-                        <option>User</option>
-                    </select>
-                </div>
-
-                <script>
-                    $("select[name='user_type']").val("{{$user->user_type}}");
-                </script>
             </div>
 
             <div class="footerlogin">

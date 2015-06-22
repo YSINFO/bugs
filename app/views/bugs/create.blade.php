@@ -34,12 +34,13 @@
             </div>
 
             <div class="content">
-                <input name="title" class="input" placeholder="Bug title" type="text"/>
+                <div class="form-row">
+                    <input name="title" class="input" placeholder="Bug title" type="text"/>
+                </div>
 
-                <div class="user-icon"></div>
-                <textarea name="description" class="input" placeholder="Description of bug"></textarea>
-
-                <div class="pass-icon"></div>
+                <div class="form-row">
+                    <textarea name="description" class="input" placeholder="Description of bug"></textarea>
+                </div>
             </div>
 
             <div class="footerlogin">

@@ -4,6 +4,7 @@ class ProjectController extends BaseController {
 
     function __construct(){
         View::share('root', URL::to('/'));
+        View::share('name', Session::get('name'));
     }
 
     function createProject(){

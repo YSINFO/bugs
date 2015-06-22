@@ -4,6 +4,7 @@ class BugController extends BaseController {
 
     function __construct(){
         View::share('root', URL::to('/'));
+        View::share('name', Session::get('name'));
     }
 
     function createBug(){
@@ -70,6 +71,9 @@ class BugController extends BaseController {
     function listBugs($projectId){
 
         if(isset($projectId)){
+
+            Session::put('currentProject', $projectId);
+
             $bugs = Bug::where('project_id', '=', $projectId)->get();
 
             return View::make('bugs.list')->with('bugs', $bugs);

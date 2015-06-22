@@ -20,6 +20,8 @@ Route::get('/create-user', 'UserController@createUser');
 Route::post('/save-user', 'UserController@saveUser');
 Route::post('/is-duplicate-user', 'UserController@isDuplicateUser');
 Route::get('/list-users', 'UserController@listUsers');
+Route::get('/profile', 'UserController@profile');
+Route::post('/update-profile', 'UserController@updateProfile');
 
 Route::get('/create-project', 'ProjectController@createProject');
 Route::post('/save-project', 'ProjectController@saveProject');
@@ -37,5 +39,7 @@ Route::get('/list-bug-comments/{id}', 'BugController@listBugComments');
 
 Route::get('/data-list-projects', 'ProjectController@dataListProjects');
 Route::get('/data-list-bugs', 'BugController@dataListBugs');                  // id => project id
-Route::get('/data-list-bug-comments/{id}', 'BugController@dataListBugComments');   // id => bug id
+Route::get('/data-list-bug-comments', 'BugController@dataListBugComments');   // id => bug id
 Route::get('/data-list-users', 'UserController@dataListUsers');
+
+Route::get('/logout', 'AuthenticationController@logout');

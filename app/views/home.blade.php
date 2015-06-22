@@ -6,36 +6,43 @@
         Administrator Section
     </title>
 
+    {{HTML::style(asset("/public/css/common.css"))}}
+    {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
     {{HTML::style(asset("/public/css/login.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
     {{HTML::script(asset("/public/js/common.js"))}}
     {{HTML::script(asset("/public/js/login.js"))}}
 
-    </head>
+</head>
 <body>
 <div>
 
     <div id="wrapper" class="ys-adminform">
 
+        @include('includes.header_logo')
+
         <form id="form-login" class="admin-section-form frm">
 
             <div class="header">
-                <div style="">
-                    {{HTML::image(asset("public/images/logo.png"))}}
-                </div>
                 <br/>
+
                 <h1>Login</h1>
                 <br/>
             </div>
 
             <div class="content">
-                <input name="email" class="input" placeholder="Email" type="text"/>
 
-                <div class="user-icon"></div>
-                <input name="password" class="input password" placeholder="Password" type="password"/>
+                <div class="form-row">
+                    <input name="email" class="input" placeholder="Email" type="text"/>
 
-                <div class="pass-icon"></div>
+                    <div class="user-icon"></div>
+                </div>
+                <div class="form-row">
+                    <input name="password" class="input password" placeholder="Password" type="password"/>
+
+                    <div class="pass-icon"></div>
+                </div>
             </div>
 
             <div class="footerlogin">
@@ -47,9 +54,8 @@
         </form>
 
     </div>
-    <div class="gradient"></div>
 </div>
 
-@include('footer')
+@include('includes.footer')
 </body>
 </html>

@@ -7,7 +7,8 @@
     </title>
 
     {{HTML::style(asset("/public/css/common.css"))}}
-    {{HTML::style(asset("/public/css/user-section.css"))}}
+    {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
+    {{HTML::style(asset("/public/css/users/user-section.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
     {{HTML::script(asset("/public/js/common.js"))}}
@@ -18,12 +19,42 @@
 <div>
 
     <div id="wrapper" class="main-container">
+        @include('includes.header')
 
+        <table>
+            <tr>
+                <td style="width: 150px; line-height: 30px;">Running projects</td>
+                <td style="width:50px">:</td>
+                <td>{{$runningProjects}}</td>
+            </tr>
+            <tr>
+                <td style="width: 150px; line-height: 30px">Closed projects</td>
+                <td style="width:50px">:</td>
+                <td>{{$closedProjects}}</td>
+            </tr>
+            <tr>
+                <td style="width: 150px; line-height: 30px" colspan="3"><hr/></td>
+            </tr>
+            <tr>
+                <td style="width: 150px; line-height: 30px">Current bugs count</td>
+                <td style="width:50px">:</td>
+                <td>{{$currentBugs}}</td>
+            </tr>
+            <tr>
+                <td style="width: 150px; line-height: 30px">Fixed bugs count</td>
+                <td style="width:50px">:</td>
+                <td>{{$fixedBugs}}</td>
+            </tr>
+            <tr>
+                <td style="width: 150px; line-height: 30px">Unresolved projects</td>
+                <td style="width:50px">:</td>
+                <td>{{$unresolvedBugs}}</td>
+            </tr>
+        </table>
 
     </div>
-    <div class="gradient"></div>
 </div>
 
-@include('footer')
+@include('includes.footer')
 </body>
 </html>

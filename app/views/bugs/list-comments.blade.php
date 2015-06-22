@@ -7,6 +7,7 @@
     </title>
 
     {{HTML::style(asset("/public/css/jquery.dataTables.css"))}}
+    {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
     {{HTML::style(asset("/public/css/bugs/list-comments.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
@@ -20,10 +21,9 @@
 
     <div id="wrapper" class="main-container">
 
+        @include('includes.header')
+
         <div class="header">
-            <div style="">
-                {{HTML::image(asset("public/images/logo.png"))}}
-            </div>
             <div>
                 <br/>
                 <a href="{{$root}}/list-bugs/{{$projectId}}">Back</a>
@@ -38,7 +38,7 @@
 
 </div>
 
-@include('footer')
+@include('includes.footer')
 
 </body>
 </html>

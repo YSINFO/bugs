@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration {
             $table->string('email', 255);
             $table->string('password', 255);
             $table->string('user_type', 255);
+            $table->string('profile_image_name', 255);
+            $table->string('profile_image_saved_name', 255);
             $table->string('status', 50);
 
             $table->timestamps();

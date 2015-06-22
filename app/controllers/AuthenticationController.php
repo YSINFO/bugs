@@ -14,6 +14,7 @@ class AuthenticationController extends BaseController {
         else{
             Session::put('userId', $user->id);
             Session::put('userType', $user->user_type);
+            Session::put('name', $user->name);
 
             return "correct";
         }
@@ -25,6 +26,6 @@ class AuthenticationController extends BaseController {
 
         Auth::logout();
 
-        return Redirect::to('index');
+        return Redirect::to('/');
     }
 }

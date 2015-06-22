@@ -7,6 +7,7 @@
     </title>
 
     {{HTML::style(asset("/public/css/jquery.dataTables.css"))}}
+    {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
     {{HTML::style(asset("/public/css/projects/list.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
@@ -20,21 +21,18 @@
 
     <div id="wrapper" class="main-container">
 
-            <div class="header">
-                <div style="">
-                    {{HTML::image(asset("public/images/logo.png"))}}
-                </div>
-                <br/>
-                <h1>Project list</h1>
-                <br/>
-            </div>
+        @include('includes.header')
 
-            <div id="table-data"></div>
+        <div class="header">
+            <h1>Project list</h1>
+        </div>
+
+        <div id="table-data"></div>
     </div>
 
 </div>
 
-@include('footer')
+@include('includes.footer')
 
 </body>
 </html>

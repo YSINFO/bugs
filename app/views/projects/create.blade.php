@@ -18,16 +18,9 @@
 
     <div id="wrapper" class="main-container">
 
-        <form id="form-project" class="admin-section-form frm">
+        @include('includes.header')
 
-            <div class="header">
-                <div style="">
-                    {{HTML::image(asset("public/images/logo.png"))}}
-                </div>
-                <br/>
-                <h1>Create project</h1>
-                <br/>
-            </div>
+        <form id="form-project" class="admin-section-form frm">
 
             <div class="content">
                 <input name="name" class="input username" placeholder="Project name" type="text"/>
@@ -50,6 +43,6 @@
     <div class="gradient"></div>
 </div>
 
-@include('footer')
+@include('includes.footer')
 </body>
 </html>

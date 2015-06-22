@@ -54,8 +54,6 @@ function getProjectTable(data){
 
             str += '<td>';
             str += '<a href="list-bugs/' + project.id + '">View bugs</a>';
-            str += '&nbsp;&nbsp;';
-            str += '<a href="create-bug/' + project.id + '">Create bug</a>';
             str += '</td>';
 
             str += '</tr>';

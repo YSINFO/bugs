@@ -6,6 +6,7 @@
         Administrator Section
     </title>
 
+    {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
     {{HTML::style(asset("/public/css/projects/edit.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
@@ -16,6 +17,8 @@
 <div>
 
     <div id="wrapper" class="ys-adminform">
+
+        @include('includes.header')
 
         <form name="admin-section-form" class="admin-section-form frm">
 
@@ -46,9 +49,8 @@
         </form>
 
     </div>
-    <div class="gradient"></div>
 </div>
 
-
+@include('includes.footer')
 </body>
 </html>

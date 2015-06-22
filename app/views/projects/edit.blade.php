@@ -17,6 +17,8 @@
 
     <div id="wrapper" class="ys-adminform">
 
+        @include('includes.header')
+
         <form name="admin-section-form" class="admin-section-form frm">
 
             <div class="header">
@@ -46,9 +48,8 @@
         </form>
 
     </div>
-    <div class="gradient"></div>
 </div>
 
-
+@include('includes.footer')
 </body>
 </html>

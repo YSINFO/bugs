@@ -19,7 +19,7 @@ function getBugComments(){
                 $('#bug-table').DataTable();
             }
             else
-                $("#table-data").html("No bugs found");
+                $("#table-data").html("No comments added");
         }
     });
 }

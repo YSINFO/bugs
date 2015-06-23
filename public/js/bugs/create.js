@@ -1,4 +1,7 @@
 $(function(){
+
+    $(".add-file").click(addFile);
+
     $("input[name='btn-create-bug']").click(createBug);
 
     $("input, textarea").keydown(function(){
@@ -10,14 +13,29 @@ function createBug(){
 
     $(".message").html("Creating bug...");
 
-    var data = $("#form-bug").serialize();
+    $("#ifr").load(function(){
 
-    $.ajax({
-        url: root + 'save-bug',
-        data: data,
-        type: 'post',
-        success: function(result){
-            $(".message").html(result);
-        }
-    })
+        var result = $(this).contents().find('body').html();
+
+        $(".message").html(result);
+    });
+
+    return true;
+}
+
+function addFile(){
+
+    var file = "<div class='single-file'>";
+    file += "<input type='file' name='file[]'/>";
+    file += "<img class='remove-file' src='" + root + "public/images/remove.png'/>";
+    file += "</div>";
+
+    $(".file-container").append(file);
+
+    $(".remove-file").unbind('click');
+    $(".remove-file").click(removeFile);
+}
+
+function removeFile(){
+    $(this).parent().remove();
 }

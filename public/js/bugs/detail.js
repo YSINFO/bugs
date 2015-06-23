@@ -15,7 +15,7 @@ function getBugComments(){
 
             if(table!=null){
 
-                $("#table-data").html(table);
+                $("#bug-comments").html(table);
                 $('#bug-table').DataTable();
             }
             else

@@ -29,6 +29,29 @@ class BugController extends BaseController {
 
         $bug->save();
 
+        $files = Input::file('file');
+        $fileCount = count($files);
+
+        if($fileCount>0){
+            foreach($files as $file) {
+                $destinationPath = 'public/uploads';
+
+                $savedFileName = date('Ymdhis');
+
+                $filename = $file->getClientOriginalName();
+                $file->move($destinationPath, $savedFileName);
+
+                $bugFile = new BugFile();
+
+                $bugFile->bug_id = $bug->id;
+                $bugFile->file_name = $filename;
+                $bugFile->saved_file_name = $savedFileName;
+                $bugFile->status = 'active';
+
+                $bugFile->save();
+            }
+        }
+
         echo 'Bug created successfully';
     }
 
@@ -74,9 +97,7 @@ class BugController extends BaseController {
 
             Session::put('currentProject', $projectId);
 
-            $bugs = Bug::where('project_id', '=', $projectId)->get();
-
-            return View::make('bugs.list')->with('bugs', $bugs);
+            return View::make('bugs.list');
         }
         else
             return Redirect::to('/');
@@ -96,20 +117,54 @@ class BugController extends BaseController {
         echo 'done';
     }
 
-    function listBugComments($bugId){
+    function bugDetail($bugId){
 
         if(isset($bugId)){
-            Session::put('bugId', $bugId);
 
             $projectId = Session::get('currentProject');
 
-            if(isset($projectId))
-                return View::make('bugs.list-comments')->with('projectId', $projectId);
+            if(isset($projectId)){
+
+                $bug = Bug::find($bugId);
+
+                if(isset($bug)){
+                    Session::put('bugId', $bugId);
+
+                    $bugFiles = BugFile::where('bug_id', '=', $bugId)->get();
+
+                    return View::make('bugs.bug-detail')
+                        ->with('projectId', $projectId)
+                        ->with('bug', $bug)
+                        ->with('bugFiles', $bugFiles);
+                }
+                else
+                    return Redirect::to('/');
+            }
             else
                 return Redirect::to('/');
         }
         else
             return Redirect::to('/');
+    }
+
+    public function downloadBug($bugId){
+
+        if(isset($bugId)){
+
+            $bug = Bug::find($bugId);
+
+            if(isset($bug)){
+
+                $bugFiles = BugFile::where('bug_id', '=', $bugId)->get();
+
+                if(isset($bugFiles)){
+
+                    foreach($bugFiles as $bugFile){
+
+                    }
+                }
+            }
+        }
     }
 
     /****************** json methods ***********************/

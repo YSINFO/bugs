@@ -56,6 +56,7 @@ class UserController extends BaseController {
             $user->name = Input::get('name');
             $user->password = Input::get('password');
             $user->user_type = Input::get('user_type');
+            $user->status = 'active';
 
             $user->save();
 
@@ -171,6 +172,25 @@ class UserController extends BaseController {
         return View::make('users.list');
     }
 
+    function removeUser($userId){
+
+        if(isset($userId)) {
+
+            $user = User::find($userId);
+
+            if(isset($user)){
+                $user->status = 'removed';
+
+                $user->save();
+
+                echo 'done';
+            }
+            else
+                echo 'invalid';
+        }
+        else
+            echo 'invalid';
+    }
 
     /************** json methods ***************/
 
@@ -180,7 +200,7 @@ class UserController extends BaseController {
         if(!isset($userId))
             return json_encode(array('message' => 'not logged'));
 
-        $users = User::all();
+        $users = User::where('status', '=', 'active')->get();
 
         if(isset($users))
             return json_encode(array('found' => true, 'users' => $users->toArray(), 'message' => 'logged'));

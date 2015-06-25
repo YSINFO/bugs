@@ -19,6 +19,7 @@ Route::get('/user-section', 'UserController@userSection');
 Route::get('/create-user', 'UserController@createUser');
 Route::post('/save-user', 'UserController@saveUser');
 Route::get('/edit-user/{id}', 'UserController@editUser');
+Route::get('/remove-user/{id}', 'UserController@removeUser');
 Route::post('/update-user', 'UserController@updateUser');
 Route::get('/list-users', 'UserController@listUsers');
 Route::get('/profile', 'UserController@profile');
@@ -35,7 +36,7 @@ Route::post('/save-bug', 'BugController@saveBug');
 Route::get('/edit-bug/{id}', 'BugController@editBug');
 Route::post('/update-bug', 'BugController@updateBug');
 Route::get('/list-bugs/{id}', 'BugController@listBugs');
-Route::post('/add-bug-comment', 'BugController@addBugComment');
+Route::post('/save-bug-comment', 'BugController@saveBugComment');
 Route::get('/bug-detail/{id}', 'BugController@bugDetail');
 Route::post('/download-bug', 'BugController@downloadBug');
 

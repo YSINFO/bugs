@@ -25,6 +25,10 @@
         <form id="form-edit-user" class="admin-section-form frm" onsubmit="return false">
 
             <div class="header">
+                <div>
+                    <a href="{{$root}}/list-users">View users</a> <br/>
+                </div>
+
                 <br/>
                 <h1>Update this user</h1>
                 <br/>

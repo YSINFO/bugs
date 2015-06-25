@@ -25,6 +25,10 @@
         <form id="form-create-user" class="admin-section-form frm" onsubmit="return false">
 
             <div class="header">
+                <div>
+                    <a href="{{$root}}/list-users">View users</a> <br/>
+                </div>
+
                 <br/>
                 <h1>Create a new user</h1>
                 <br/>

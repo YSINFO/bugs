@@ -2,8 +2,19 @@ $(function(){
 
     getBugComments();
 
-    $("input[name='btn-add-comment']").click(addComment);
+    $(".add-file").click(addFile);
+
+    $("#ifr").load(function(){
+        getBugComments();
+    });
 });
+
+function checkComment(){
+
+    var comment = $("textarea[name='comment']").val();
+
+    return comment.length>0;
+}
 
 function getBugComments(){
 
@@ -13,7 +24,7 @@ function getBugComments(){
         dataType: 'json',
         success: function(result){
 
-            if(result.message.indexOf('not logged')) {
+            if(result.message.indexOf('not logged')>-1) {
                 window.location.replace = root;
                 return;
             }
@@ -23,10 +34,9 @@ function getBugComments(){
             if(table!=null){
 
                 $("#bug-comments").html(table);
-                $('#bug-table').DataTable();
             }
             else
-                $("#table-data").html("No comments added");
+                $("#bug-comments").html("No comments added");
         }
     });
 }
@@ -51,12 +61,12 @@ function getBugTable(data){
 
         for(var i=0; i<data.comments.length;i++){
 
-            var bug = data.comments[i];
+            var comment = data.comments[i];
 
             str += '<tr>';
             str += '<td>' + (i+1) + '</td>';
             str += '<td>' + comment.user.name + '</td>';
-            str += '<td>' + comment.content + '</td>';
+            str += '<td>' + comment.comment + '</td>';
 
             str += '</tr>';
         }
@@ -67,27 +77,19 @@ function getBugTable(data){
     }
 }
 
-function addComment(){
+function addFile(){
 
-    $(".message").html("Creating project...");
+    var file = "<div class='single-file'>";
+    file += "<input type='file' name='file[]'/>";
+    file += "<img class='remove-file icon' src='" + root + "public/images/remove.png'/>";
+    file += "</div>";
 
-    var data = $("#form-project").serialize();
+    $(".file-container").append(file);
 
-    $.ajax({
-        url: root + 'save-project',
-        data: data,
-        type: 'post',
-        success: function(result){
+    $(".remove-file").unbind('click');
+    $(".remove-file").click(removeFile);
+}
 
-            if(result.indexOf('not logged')>-1) {
-                window.location.replace(root);
-                return;
-            }
-
-            if(result.indexOf('duplicate')>-1)
-                $(".message").html('Project title is duplicate');
-            else if(result.indexOf('done')>-1)
-                $(".message").html('Project created successfully');
-        }
-    })
+function removeFile(){
+    $(this).parent().remove();
 }

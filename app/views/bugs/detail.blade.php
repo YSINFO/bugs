@@ -9,7 +9,7 @@
     {{HTML::style(asset("/public/css/jquery.dataTables.css"))}}
     {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
     {{HTML::style(asset("/public/css/common.css"))}}
-    {{HTML::style(asset("/public/css/bugs/list-comments.css"))}}
+    {{HTML::style(asset("/public/css/bugs/detail.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
     {{HTML::script(asset("/public/js/jquery.dataTables.min.js"))}}
@@ -69,15 +69,28 @@
 
             <br/>
             <div class="form-row">
-                <textarea name="comment" rows="5" cols="40" placeholder="Add your comment"></textarea>
-                <br/><br/>
-                <input type="button" name="btn-add-comment" value="Add comment"/>
+                <form action="{{$root}}/save-bug-comment" id="form-comment" method="post" target="ifr" enctype="multipart/form-data" onsubmit="return checkComment()">
+                    <textarea name="comment" rows="5" cols="40" placeholder="Add your comment"></textarea>
+
+                    <br/><br/>
+
+                    <div class="form-row"><span class="add-file">Add attachment</span></div>
+
+                    <br/>
+
+                    <div class="form-row file-container"></div>
+
+                    <br/>
+
+                    <input type="submit" name="btn-add-comment" value="Add comment"/>
+                </form>
+                <iframe id="ifr" name="ifr" style="width:1px;height:1px;visibility: hidden"></iframe>
             </div>
             <div class="form-row bug-comments"></div>
 
         </div>
 
-        <div id="table-data"></div>
+        <div id="bug-comments"></div>
     </div>
 
 </div>

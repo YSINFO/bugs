@@ -125,7 +125,7 @@ class BugController extends BaseController {
             return Redirect::to('/');
     }
 
-    function addBugComment(){
+    function saveBugComment(){
 
         $userId = Session::get('userId');
         if(!isset($userId))
@@ -135,10 +135,33 @@ class BugController extends BaseController {
 
         $bugComment->comment= Input::get('comment');
         $bugComment->created_by = Session::get('userId');
-        $bugComment->bug_id = Input::get('bug_id');
+        $bugComment->bug_id = Session::get('currentBugId');
         $bugComment->status = 'active';
 
         $bugComment->save();
+
+        $files = Input::file('file');
+        $fileCount = count($files);
+
+        if($fileCount>0){
+            foreach($files as $file) {
+                $destinationPath = 'public/uploads';
+
+                $savedFileName = date('Ymdhis');
+
+                $filename = $file->getClientOriginalName();
+                $file->move($destinationPath, $savedFileName);
+
+                $bugCommentFile = new BugCommentFile();
+
+                $bugCommentFile->bug_comment_id = $bugComment->id;
+                $bugCommentFile->file_name = $filename;
+                $bugCommentFile->saved_file_name = $savedFileName;
+                $bugCommentFile->status = 'active';
+
+                $bugCommentFile->save();
+            }
+        }
 
         echo 'done';
     }
@@ -158,11 +181,11 @@ class BugController extends BaseController {
                 $bug = Bug::find($bugId);
 
                 if(isset($bug)){
-                    Session::put('bugId', $bugId);
+                    Session::put('currentBugId', $bugId);
 
                     $bugFiles = BugFile::where('bug_id', '=', $bugId)->get();
 
-                    return View::make('bugs.bug-detail')
+                    return View::make('bugs.detail')
                         ->with('projectId', $projectId)
                         ->with('bug', $bug)
                         ->with('bugFiles', $bugFiles);
@@ -211,12 +234,12 @@ class BugController extends BaseController {
             $bugs = Bug::where('project_id', '=', $projectId)->get();
 
             if($bugs && count($bugs)>0)
-                return json_encode(array('found' => true, 'bugs' => $bugs->toArray(), 'message' => 'not logged'));
+                return json_encode(array('found' => true, 'bugs' => $bugs->toArray(), 'message' => 'logged'));
             else
-                return json_encode(array('found' => false, 'message' => 'not logged'));
+                return json_encode(array('found' => false, 'message' => 'logged'));
         }
         else
-            return json_encode(array('found' => false, 'message' => 'not logged'));
+            return json_encode(array('found' => false, 'message' => 'logged'));
     }
 
     function dataListBugComments(){
@@ -225,17 +248,17 @@ class BugController extends BaseController {
         if(!isset($userId))
             return json_encode(array('message' => 'not logged'));
 
-        $bugId = Session::get('currentBug');
+        $bugId = Session::get('currentBugId');
 
         if(isset($bugId)){
-            $comments = Bug::where('bug_id', '=', $bugId)->get();
+            $comments = BugComment::with('User')->where('bug_id', '=', $bugId)->get();
 
             if($comments && count($comments)>0)
-                return json_encode(array('found' => true, 'comments' => $comments->toArray(), 'message' => 'not logged'));
+                return json_encode(array('found' => true, 'comments' => $comments->toArray(), 'message' => 'logged'));
             else
-                return json_encode(array('found' => false, 'message' => 'not logged'));
+                return json_encode(array('found' => false, 'message' => 'logged'));
         }
         else
-            return json_encode(array('found' => false, 'message' => 'not logged'));
+            return json_encode(array('found' => false, 'message' => 'logged'));
     }
 }

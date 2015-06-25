@@ -6,4 +6,11 @@ class BugComment extends Eloquent {
 
 	protected $hidden = array();
 
+    public function user(){
+        return $this->belongsTo('User', 'created_by');
+    }
+
+    public function bugCommentFiles(){
+        return $this->hasMany('BugCommentFile');
+    }
 }

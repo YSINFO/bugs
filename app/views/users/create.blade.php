@@ -10,8 +10,9 @@
     {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
+    {{HTML::script(asset("/public/js/jquery.validate.min.js"))}}
     {{HTML::script(asset("/public/js/common.js"))}}
-    {{HTML::script(asset("/public/js/users/profile.js"))}}
+    {{HTML::script(asset("/public/js/users/create.js"))}}
 
 </head>
 <body>
@@ -21,30 +22,30 @@
 
         @include('includes.header')
 
-        <form id="user-profile" class="admin-section-form frm">
+        <form id="form-create-user" class="admin-section-form frm" onsubmit="return false">
 
             <div class="header">
                 <br/>
-                <h1>Update your profile</h1>
+                <h1>Create a new user</h1>
                 <br/>
             </div>
 
             <div class="content">
 
                 <div class="form-row">
-                    <input name="email" class="input" placeholder="Email" type="text" value="{{$user->email}}"/>
+                    <input id="email" name="email" class="input" placeholder="Email" type="text"/>
                 </div>
 
                 <div class="form-row">
-                    <input name="name" class="input" placeholder="Name" type="text" value="{{$user->name}}"/>
+                    <input id="name" name="name" class="input" placeholder="Name" type="text"/>
                 </div>
 
                 <div class="form-row">
-                    <input name="password" class="input" placeholder="Password" type="password" value="{{$user->password}}"/>
+                    <input id="password" name="password" class="input" placeholder="Password" type="password"/>
                 </div>
 
                 <div class="form-row">
-                    <input name="confirm-password" class="input" placeholder="Confirm password" type="password" value="{{$user->password}}"/>
+                    <input id="confirm_password" name="confirm_password" class="input" placeholder="Confirm password" type="password"/>
                 </div>
 
                 <div class="form-row">
@@ -54,14 +55,10 @@
                         <option>User</option>
                     </select>
                 </div>
-
-                <script>
-                    $("select[name='user_type']").val("{{$user->user_type}}");
-                </script>
             </div>
 
             <div class="footerlogin">
-                <input class="button" name="btn-update-profile" value="Update" type="button"/>
+                <input class="button" name="btn-create-user" value="Create" type="submit"/>
 
                 <div class="message" style="font-weight: bold; padding-top:16px;">&nbsp;</div>
             </div>

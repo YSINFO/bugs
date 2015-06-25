@@ -19,7 +19,7 @@ function checkLogin(){
         success: function(data){
 
             if(data.indexOf('invalid')>-1)
-                $(".message").html(data);
+                $(".message").html('Invalid email or password');
             else
                 window.location.replace(root + 'user-section');
         }

@@ -7,9 +7,11 @@
     </title>
 
     {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
+    {{HTML::style(asset("/public/css/common.css"))}}
     {{HTML::style(asset("/public/css/projects/edit.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
+    {{HTML::script(asset("/public/js/jquery.validate.min.js"))}}
     {{HTML::script(asset("/public/js/projects/edit.js"))}}
 
 </head>

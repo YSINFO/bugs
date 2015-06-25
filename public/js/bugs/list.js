@@ -9,9 +9,14 @@ function getBugs(){
         url: root + 'data-list-bugs',
         type: 'get',
         dataType: 'json',
-        success: function(data){
+        success: function(result){
 
-            var table = getBugTable(data);
+            if(result.message.indexOf('not logged')>-1) {
+                //window.location.replace(root);
+                //return;
+            }
+
+            var table = getBugTable(result);
 
             if(table!=null){
 
@@ -38,6 +43,7 @@ function getBugTable(data){
         str += '<td>S.No.</td>';
         str += '<td>Name</td>';
         str += '<td>Description</td>';
+        str += '<td>Severity</td>';
         str += '<td>Action</td>';
         str += '</tr>';
 
@@ -51,14 +57,12 @@ function getBugTable(data){
             str += '<td>' + (i+1) + '</td>';
             str += '<td>' + bug.title + '</td>';
             str += '<td>' + bug.description + '</td>';
+            str += '<td class="' + bug.severity.toLowerCase() + '">' + bug.severity + '</td>';
 
             str += '<td>';
             str += '<a href="' + root + 'bug-detail/' + bug.id + '" title="View detail"><img class="icon" src="' + root + 'public/images/view-comments.png"/></a>';
             str += '&nbsp;&nbsp;&nbsp;';
             str += '&nbsp;&nbsp;&nbsp;';
-            str += '<a href="#" title="Add comment"><img class="icon" src="' + root + 'public/images/add-comment.png"/></a>';
-            str += '&nbsp;&nbsp;&nbsp;';
-            str += '&nbsp;';
             str += '<a href="' + root + 'list-bugs/' + bug.id + '" title="Change status"><img class="icon" src="' + root + 'public/images/change-status.jpg"/></a>';
             str += '</td>';
 

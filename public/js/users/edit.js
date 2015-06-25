@@ -2,7 +2,7 @@ $(function(){
 
     $.validator.setDefaults({
         submitHandler: function() {
-            updateProfile();
+            updateUser();
 
             return false;
         }
@@ -15,14 +15,14 @@ $(function(){
     initializeValidation();
 });
 
-function updateProfile(){
+function updateUser(){
 
     $(".message").html("Updating profile...");
 
-    var data = $("#form-user-profile").serialize();
+    var data = $("#form-edit-user").serialize();
 
     $.ajax({
-        url: root + 'update-profile',
+        url: root + 'update-user',
         data: data,
         type: 'post',
         success: function(result){
@@ -38,7 +38,7 @@ function updateProfile(){
 }
 
 function initializeValidation(){
-    $("#form-user-profile").validate({
+    $("#form-edit-user").validate({
         rules: {
             email: {
                 required: true,

@@ -9,6 +9,10 @@ class BugController extends BaseController {
 
     function createBug(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
         $projectId = Session::get('currentProject');
 
         if(isset($projectId))
@@ -19,11 +23,17 @@ class BugController extends BaseController {
 
     function saveBug(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId)){
+            return "not logged";
+        }
+
         $bug = new Bug();
 
         $bug->title = Input::get('title');
         $bug->description = Input::get('description');
-        $bug->created_by = 1; //Session::get('userId');
+        $bug->severity = Input::get('severity');
+        $bug->created_by = Session::get('userId');
         $bug->project_id = Session::get('currentProject');
         $bug->status = 'active';
 
@@ -52,10 +62,14 @@ class BugController extends BaseController {
             }
         }
 
-        echo 'Bug created successfully';
+        echo 'done';
     }
 
     function editBug($id){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
 
         $bug = Bug::find($id);
 
@@ -63,6 +77,10 @@ class BugController extends BaseController {
     }
 
     function updateBug(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return "not logged";
 
         $id = Input::get('id');
 
@@ -93,6 +111,10 @@ class BugController extends BaseController {
 
     function listBugs($projectId){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
         if(isset($projectId)){
 
             Session::put('currentProject', $projectId);
@@ -105,9 +127,13 @@ class BugController extends BaseController {
 
     function addBugComment(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return "not logged";
+
         $bugComment = new BugComment();
 
-        $bugComment->comment= Input::get('title');
+        $bugComment->comment= Input::get('comment');
         $bugComment->created_by = Session::get('userId');
         $bugComment->bug_id = Input::get('bug_id');
         $bugComment->status = 'active';
@@ -118,6 +144,10 @@ class BugController extends BaseController {
     }
 
     function bugDetail($bugId){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
 
         if(isset($bugId)){
 
@@ -171,21 +201,29 @@ class BugController extends BaseController {
 
     function dataListBugs(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return json_encode(array('message' => 'not logged'));
+
         $projectId = Session::get('currentProject');
 
         if(isset($projectId)){
             $bugs = Bug::where('project_id', '=', $projectId)->get();
 
             if($bugs && count($bugs)>0)
-                return json_encode(array('found' => true, 'bugs' => $bugs->toArray()));
+                return json_encode(array('found' => true, 'bugs' => $bugs->toArray(), 'message' => 'not logged'));
             else
-                return json_encode(array('found' => false));
+                return json_encode(array('found' => false, 'message' => 'not logged'));
         }
         else
-            return json_encode(array('found' => false));
+            return json_encode(array('found' => false, 'message' => 'not logged'));
     }
 
     function dataListBugComments(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return json_encode(array('message' => 'not logged'));
 
         $bugId = Session::get('currentBug');
 
@@ -193,11 +231,11 @@ class BugController extends BaseController {
             $comments = Bug::where('bug_id', '=', $bugId)->get();
 
             if($comments && count($comments)>0)
-                return json_encode(array('found' => true, 'comments' => $comments->toArray()));
+                return json_encode(array('found' => true, 'comments' => $comments->toArray(), 'message' => 'not logged'));
             else
-                return json_encode(array('found' => false));
+                return json_encode(array('found' => false, 'message' => 'not logged'));
         }
         else
-            return json_encode(array('found' => false));
+            return json_encode(array('found' => false, 'message' => 'not logged'));
     }
 }

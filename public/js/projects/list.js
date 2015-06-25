@@ -9,9 +9,14 @@ function getProjects(){
         url: root + 'data-list-projects',
         type: 'get',
         dataType: 'json',
-        success: function(data){
+        success: function(result){
 
-            var table = getProjectTable(data);
+            if(result.message.indexOf('not logged')>-1) {
+                window.location.replace(root);
+                return;
+            }
+
+            var table = getProjectTable(result);
 
             if(table!=null){
 

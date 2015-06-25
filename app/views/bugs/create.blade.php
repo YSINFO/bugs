@@ -11,6 +11,7 @@
     {{HTML::style(asset("/public/css/bugs/create.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
+    {{HTML::script(asset("/public/js/jquery.validate.min.js"))}}
     {{HTML::script(asset("/public/js/common.js"))}}
     {{HTML::script(asset("/public/js/bugs/create.js"))}}
 
@@ -22,11 +23,11 @@
 
         @include('includes.header')
 
-        <form id="form-bug" method="post" action="{{$root}}/save-bug" target="ifr" name="ifr" enctype="multipart/form-data" onsubmit="return createBug()">
+        <form id="form-bug" method="post" action="{{$root}}/save-bug" target="ifr" name="ifr" enctype="multipart/form-data">
 
             <div class="header">
                 <div>
-                    <a href="{{$root}}/list-bugs/{{$projectId}}">View all bugs</a> <br/>
+                    <a href="{{$root}}/list-bugs/{{$projectId}}">View bugs</a> <br/>
                 </div>
 
                 <br/>
@@ -43,7 +44,19 @@
                     <textarea name="description" class="input" placeholder="Description of bug"></textarea>
                 </div>
 
+                <div class="form-row">
+                    <select name="severity">
+                        <option>Important</option>
+                        <option>Severe</option>
+                        <option>Warning</option>
+                    </select>
+                </div>
+
+                <br/>
+
                 <div class="form-row"><span class="add-file">Add attachment</span></div>
+
+                <br/>
 
                 <div class="form-row file-container"></div>
             </div>

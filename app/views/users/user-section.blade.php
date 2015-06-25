@@ -46,7 +46,7 @@
                 <td>{{$fixedBugs}}</td>
             </tr>
             <tr>
-                <td style="width: 150px; line-height: 30px">Unresolved projects</td>
+                <td style="width: 150px; line-height: 30px">Unresolved bugs</td>
                 <td style="width:50px">:</td>
                 <td>{{$unresolvedBugs}}</td>
             </tr>

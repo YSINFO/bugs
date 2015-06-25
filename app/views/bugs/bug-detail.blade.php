@@ -25,39 +25,54 @@
         @include('includes.header')
 
         <div class="header">
-            <div>
-                <br/>
+            <div class="form-row">
                 <a href="{{$root}}/list-bugs/{{$projectId}}">Back</a>
+                <br/>
             </div>
             <br/>
 
             <div class="form-row">
-                {{$bug->title}}
-            </div>
-            <div class="form-row">
                 Posted by : {{$bug->user->name}}
             </div>
             <div class="form-row">
-                How severe? {{$bug->severity}}
+                Level : <span class="{{strtolower($bug->severity)}}">{{$bug->severity}}</span>
             </div>
+            <br/>
+            <div class="form-row">
+                <strong>{{$bug->title}}</strong>
+            </div>
+            <br/>
             <div class="form-row">
                 {{$bug->description}}
             </div>
-
+            <br/>
             <?php
                 if(isset($bugFiles) && count($bugFiles)>0){
-                    echo "<div class='form-row'>";
-                    echo "<a href='$root/download-bug/$bug->id'>Download files</a>";
-                    echo "</div>";
+
+                    $image_types= array('jpeg','jpg','gif','png');
+
+                    foreach($bugFiles as $bugFile){
+
+                        $extension = pathinfo($bugFile->file_name, PATHINFO_EXTENSION);
+
+                        echo "<div class='form-row'>";
+
+                        if(in_array($extension, $image_types))
+                            echo "<a href='$root/public/uploads/$bugFile->saved_file_name' target='_blank'><img class='bug-image' src='$root/public/uploads/$bugFile->saved_file_name'/></a>";
+                        else
+                            echo "<a href='$root/download-bug/$bug->id'>$bugFile->file_name</a>";
+
+                        echo "</div>";
+                    }
                 }
             ?>
 
+            <br/>
             <div class="form-row">
                 <textarea name="comment" rows="5" cols="40" placeholder="Add your comment"></textarea>
-                <br/>
+                <br/><br/>
                 <input type="button" name="btn-add-comment" value="Add comment"/>
             </div>
-
             <div class="form-row bug-comments"></div>
 
         </div>

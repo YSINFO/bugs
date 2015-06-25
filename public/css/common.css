@@ -1,8 +1,23 @@
-input, textarea, select{ padding: 5px; }
-
 .form-row{ margin-bottom: 10px; }
 
+.form-row input[type='text'],.form-row input[type='password'],.form-row textarea,.form-row select{width: 80%;}
+
+input[type='text'],input[type='password'],textarea,select{ padding: 5px; }
+
 .icon{
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
 }
+
+a{
+    text-decoration: none;
+    color: #5375ff;
+}
+a:hover{ color: #ff522a; }
+
+.important{ color: darkgreen; }
+.warning{ color: cornflowerblue; }
+.severe{ color: red; }
+
+.center-text{ text-align: center; }
+.bug-image{ max-width: 400px; max-height: 400px; }

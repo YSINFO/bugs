@@ -9,9 +9,14 @@ function getUsers(){
         url: root + 'data-list-users',
         type: 'get',
         dataType: 'json',
-        success: function(data){
+        success: function(result){
 
-            var table = getUserTable(data);
+            if(result.message.indexOf('not logged')>-1) {
+                window.location.replace(root);
+                return;
+            }
+
+            var table = getUserTable(result);
 
             if(table!=null){
 

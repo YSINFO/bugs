@@ -9,27 +9,43 @@ class ProjectController extends BaseController {
 
     function createProject(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
         return View::make('projects.create');
     }
 
     function saveProject(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return "not logged";
+
         $name = Input::get('name');
         $project = Project::where('name', '=', $name)->where('status', '=', 'active')->first();
 
-        $project = new Project();
+        if(isset($project))
+            return "duplicate";
+        else {
+            $project = new Project();
 
-        $project->name = $name;
-        $project->description = Input::get('description');
-        $project->status = 'active';
-        $project->created_by = 1;  //Session::get('userId');
+            $project->name = $name;
+            $project->description = Input::get('description');
+            $project->status = 'active';
+            $project->created_by = 1;  //Session::get('userId');
 
-        $project->save();
+            $project->save();
 
-        echo 'done';
+            echo 'done';
+        }
     }
 
     function editProject($id){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
 
         $project = Project::find($id);
 
@@ -37,6 +53,10 @@ class ProjectController extends BaseController {
     }
 
     function updateProject(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return "not logged";
 
         $id = Input::get('id');
 
@@ -67,6 +87,10 @@ class ProjectController extends BaseController {
 
     function listProjects(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
         $projects = Project::all();
 
         return View::make('projects.list')->with('projects', $projects);
@@ -75,12 +99,16 @@ class ProjectController extends BaseController {
     /***************** json methods *****************/
     function dataListProjects(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return json_encode(array('message' => 'not logged'));
+
         $projects = Project::all();
 
         if($projects && count($projects)>0)
-            return json_encode(array('found' => true, 'projects' => $projects->toArray()));
+            return json_encode(array('found' => true, 'projects' => $projects->toArray(), 'message' => 'logged'));
         else
-            return json_encode(array('found' => false));
+            return json_encode(array('found' => false, 'message' => 'logged'));
     }
 
 }

@@ -8,6 +8,7 @@
 
     {{HTML::style(asset("/public/css/jquery.dataTables.css"))}}
     {{HTML::style(asset("/public/css/theme/transdmin.css"))}}
+    {{HTML::style(asset("/public/css/common.css"))}}
     {{HTML::style(asset("/public/css/projects/list.css"))}}
 
     {{HTML::script(asset("/public/js/jquery-1.10.2.js"))}}
@@ -24,7 +25,12 @@
         @include('includes.header')
 
         <div class="header">
+            <div>
+                <a href="{{$root}}/create-project">Create project</a>
+            </div>
+            <br/>
             <h1>Project list</h1>
+            <br/>
         </div>
 
         <div id="table-data"></div>

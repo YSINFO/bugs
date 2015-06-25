@@ -18,6 +18,8 @@ Route::post('/is-valid-user', 'AuthenticationController@isValidUser');
 Route::get('/user-section', 'UserController@userSection');
 Route::get('/create-user', 'UserController@createUser');
 Route::post('/save-user', 'UserController@saveUser');
+Route::get('/edit-user/{id}', 'UserController@editUser');
+Route::post('/update-user', 'UserController@updateUser');
 Route::get('/list-users', 'UserController@listUsers');
 Route::get('/profile', 'UserController@profile');
 Route::post('/update-profile', 'UserController@updateProfile');

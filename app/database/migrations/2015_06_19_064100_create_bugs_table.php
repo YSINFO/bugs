@@ -18,6 +18,7 @@ class CreateBugsTable extends Migration {
 
             $table->string('title', 255);
             $table->string('description', 1000);
+            $table->string('severity', 255);
             $table->integer('created_by')->unsigned();
             $table->integer('project_id')->unsigned();
             $table->string('status', 50);

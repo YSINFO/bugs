@@ -1,9 +1,16 @@
 $(function(){
-   $("input[name='btn-create-project']").click(createProject);
+
+    $.validator.setDefaults({
+        submitHandler: function() {
+            createProject();
+        }
+    });
 
     $("input, textarea").keydown(function(){
         $(".message").html("");
     });
+
+    initializeValidation();
 });
 
 function createProject(){
@@ -17,7 +24,29 @@ function createProject(){
         data: data,
         type: 'post',
         success: function(result){
-            $(".message").html(result);
+
+            if(result.indexOf('not logged')>-1) {
+                window.location.replace(root);
+                return;
+            }
+
+            if(result.indexOf('duplicate')>-1)
+                $(".message").html('Project title is duplicate');
+            else if(result.indexOf('done')>-1)
+                $(".message").html('Project created successfully');
         }
-    })
+    });
+
+    return false;
+}
+
+function initializeValidation(){
+    $("#form-project").validate({
+        rules: {
+            name: "required"
+        },
+        messages: {
+            name: "Please enter project name"
+        }
+    });
 }

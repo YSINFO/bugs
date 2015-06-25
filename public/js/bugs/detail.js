@@ -1,6 +1,8 @@
 $(function(){
 
     getBugComments();
+
+    $("input[name='btn-add-comment']").click(addComment);
 });
 
 function getBugComments(){
@@ -9,9 +11,14 @@ function getBugComments(){
         url: root + 'data-list-bug-comments',
         type: 'get',
         dataType: 'json',
-        success: function(data){
+        success: function(result){
 
-            var table = getBugTable(data);
+            if(result.message.indexOf('not logged')) {
+                window.location.replace = root;
+                return;
+            }
+
+            var table = getBugTable(result);
 
             if(table!=null){
 
@@ -58,4 +65,29 @@ function getBugTable(data){
 
         return str;
     }
+}
+
+function addComment(){
+
+    $(".message").html("Creating project...");
+
+    var data = $("#form-project").serialize();
+
+    $.ajax({
+        url: root + 'save-project',
+        data: data,
+        type: 'post',
+        success: function(result){
+
+            if(result.indexOf('not logged')>-1) {
+                window.location.replace(root);
+                return;
+            }
+
+            if(result.indexOf('duplicate')>-1)
+                $(".message").html('Project title is duplicate');
+            else if(result.indexOf('done')>-1)
+                $(".message").html('Project created successfully');
+        }
+    })
 }

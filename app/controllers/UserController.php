@@ -9,6 +9,10 @@ class UserController extends BaseController {
 
     function userSection(){
 
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
         $runningProjects = Project::where('status', '=', 'active')->count();
         $closedProjects = Project::where('status', '=', 'closed')->count();
         $currentBugs = Bug::where('status', '=', 'active')->count();
@@ -24,10 +28,19 @@ class UserController extends BaseController {
     }
 
     function createUser(){
-        return View::make('users.user-section');
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
+        return View::make('users.create');
     }
 
     function saveUser(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return 'not logged';
 
         $email = Input::get('email');
 
@@ -46,11 +59,16 @@ class UserController extends BaseController {
 
             $user->save();
 
-            echo 'done';
+            echo 'User created successfully';
         }
     }
 
     function profile(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
         $userId = Session::get('userId');
 
         if(isset($userId)){
@@ -68,6 +86,10 @@ class UserController extends BaseController {
     }
 
     function updateProfile(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return 'not logged';
 
         $userId = Session::get('userId');
 
@@ -97,7 +119,55 @@ class UserController extends BaseController {
             echo 'Invalid user';
     }
 
+    function editUser($userId){
+
+        if(!isset($userId))
+            return Redirect::to('/');
+
+        if(isset($userId)){
+            $user = User::find($userId);
+
+            Session::put('current_edit_user', $userId);
+
+            if(isset($user)){
+
+                return View::make('users.edit')->with('user', $user);
+            }
+            else
+                return Redirect::to('/');
+        }
+        else
+            return Redirect::to('/');
+    }
+
+    function updateUser(){
+
+        $userId = Session::get('current_edit_user');
+        if(!isset($userId))
+            return 'invalid';
+
+        $user = User::find($userId);
+
+        if(isset($user)){
+
+            $user->name = Input::get('name');
+            $user->password = Input::get('password');
+            $user->user_type = Input::get('user_type');
+
+            $user->save();
+
+            echo 'Profile updated successfully';
+        }
+        else
+            echo 'Invalid user';
+    }
+
     function listUsers(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return Redirect::to('/');
+
         return View::make('users.list');
     }
 
@@ -105,11 +175,16 @@ class UserController extends BaseController {
     /************** json methods ***************/
 
     function dataListUsers(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return json_encode(array('message' => 'not logged'));
+
         $users = User::all();
 
         if(isset($users))
-            return json_encode(array('found' => true, 'users' => $users->toArray()));
+            return json_encode(array('found' => true, 'users' => $users->toArray(), 'message' => 'logged'));
         else
-            return json_encode(array('found' => true));
+            return json_encode(array('found' => true, 'message' => 'logged'));
     }
 }

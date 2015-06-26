@@ -33,7 +33,7 @@ function createProject(){
             if(result.indexOf('duplicate')>-1)
                 $(".message").html('Project title is duplicate');
             else if(result.indexOf('done')>-1){
-                $("input,textarea").html('');
+                $("input[type='text'], textarea").val('');
                 $(".message").html('Project created successfully');
             }
         }

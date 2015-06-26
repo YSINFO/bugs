@@ -73,7 +73,7 @@ function getBugTable(data){
 
                         var bugCommentFile = comment.bug_comment_files[j];
 
-                        str += '<div class="bug-comment-file"><a href="">' + bugCommentFile.file_name + '</a></div>';
+                        str += '<div class="bug-comment-file"><a href="' + root + '/public/uploads/' + bugCommentFile.saved_file_name + '" target="_blank">' + bugCommentFile.file_name + '</a></div>';
                     }
                 }
 

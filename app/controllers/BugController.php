@@ -251,7 +251,7 @@ class BugController extends BaseController {
         $bugId = Session::get('currentBugId');
 
         if(isset($bugId)){
-            $comments = BugComment::with('User')->where('bug_id', '=', $bugId)->get();
+            $comments = BugComment::with(array('User', 'BugCommentFiles'))->where('bug_id', '=', $bugId)->get();
 
             if($comments && count($comments)>0)
                 return json_encode(array('found' => true, 'comments' => $comments->toArray(), 'message' => 'logged'));

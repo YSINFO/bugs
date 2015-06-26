@@ -5,6 +5,10 @@ $(function(){
     $(".add-file").click(addFile);
 
     $("#ifr").load(function(){
+
+        $(".single-file").remove();
+        $("textarea").val('');
+
         getBugComments();
     });
 });
@@ -29,11 +33,11 @@ function getBugComments(){
                 return;
             }
 
-            var table = getBugTable(result);
+            var comments = getBugTable(result);
 
-            if(table!=null){
+            if(comments!=null){
 
-                $("#bug-comments").html(table);
+                $("#bug-comments").html(comments);
             }
             else
                 $("#bug-comments").html("No comments added");
@@ -47,31 +51,34 @@ function getBugTable(data){
         return null;
     else{
 
-        var str = '<table id="bug-table" class="display" cellspacing="0" width="100%">';
-
-        str += '<thead>';
-
-        str += '<tr>';
-        str += '<td>S.No.</td>';
-        str += '<td>By</td>';
-        str += '<td>Content</td>';
-        str += '</tr>';
-
-        str += '</thead><tbody>';
+        var str = '';
 
         for(var i=0; i<data.comments.length;i++){
 
             var comment = data.comments[i];
 
-            str += '<tr>';
-            str += '<td>' + (i+1) + '</td>';
-            str += '<td>' + comment.user.name + '</td>';
-            str += '<td>' + comment.comment + '</td>';
+            if(i<data.comments.length-1)
+                str += '<div class="comment-data bottom-border">';
+            else
+                str += '<div class="comment-data">';
 
-            str += '</tr>';
+                str += '<div class="comment-by">' + comment.user.name + '</div>';
+                str += '<div class="comment-date">' + comment.created_at + '</div>';
+
+                str += '<div>' + comment.comment + '</div>';
+
+                if(comment.bug_comment_files!=undefined && comment.bug_comment_files.length>0){
+
+                    for(var j=0; j<comment.bug_comment_files.length; j++){
+
+                        var bugCommentFile = comment.bug_comment_files[j];
+
+                        str += '<div class="bug-comment-file"><a href="">' + bugCommentFile.file_name + '</a></div>';
+                    }
+                }
+
+            str += '</div>';
         }
-
-        str += '</tbody></table>';
 
         return str;
     }

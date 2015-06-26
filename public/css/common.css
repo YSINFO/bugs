@@ -15,9 +15,11 @@ a{
 }
 a:hover{ color: #ff522a; }
 
-.important{ color: darkgreen; }
-.warning{ color: cornflowerblue; }
-.severe{ color: red; }
+.blocker{ color: #7c0000; font-weight: bold; }
+.critical{ color: #ed1292; font-weight: bold; }
+.major{ color: #3247ff; font-weight: bold; }
+.minor{ color: #ffb200; font-weight: bold; }
+.warning{ color: #dcff00; font-weight: bold; }
 
 .center-text{ text-align: center; }
 .bug-image{ max-width: 400px; max-height: 400px; }

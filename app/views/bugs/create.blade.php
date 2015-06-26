@@ -41,13 +41,15 @@
                 </div>
 
                 <div class="form-row">
-                    <textarea name="description" class="input" placeholder="Description of bug"></textarea>
+                    <textarea name="description" class="input" placeholder="Description of bug" rows="5"></textarea>
                 </div>
 
                 <div class="form-row">
                     <select name="severity">
-                        <option>Important</option>
-                        <option>Severe</option>
+                        <option>Blocker</option>
+                        <option>Critical</option>
+                        <option>Major</option>
+                        <option>Minor</option>
                         <option>Warning</option>
                     </select>
                 </div>

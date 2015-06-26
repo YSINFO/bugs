@@ -33,7 +33,7 @@ class ProjectController extends BaseController {
             $project->name = $name;
             $project->description = Input::get('description');
             $project->status = 'active';
-            $project->created_by = 1;  //Session::get('userId');
+            $project->created_by = Session::get('userId');
 
             $project->save();
 

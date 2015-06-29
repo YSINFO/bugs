@@ -31,6 +31,7 @@ $(function(){
         else if(result.indexOf('done')>-1) {
             $(".message").html('Bug created successfully');
             $(".single-file").remove();
+            $("select[name='users'] option:selected").removeAttr("selected");
             $("input[type='text'], textarea").val('');
         }
     });

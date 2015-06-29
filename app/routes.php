@@ -39,6 +39,7 @@ Route::get('/list-bugs/{id}', 'BugController@listBugs');
 Route::post('/save-bug-comment', 'BugController@saveBugComment');
 Route::get('/bug-detail/{id}', 'BugController@bugDetail');
 Route::post('/download-bug', 'BugController@downloadBug');
+Route::post('/change-bug-status', 'BugController@changeBugStatus');
 
 Route::get('/data-list-projects', 'ProjectController@dataListProjects');
 Route::get('/data-list-bugs', 'BugController@dataListBugs');                  // id => project id

@@ -1,19 +1,26 @@
+var currentBugId = -1;
+
 $(function(){
+
+    $("input[name='bug_type']").click(getBugs);
 
     getBugs();
 });
 
 function getBugs(){
 
+    var bugType = $("input[name='bug_type']:checked").val();
+
     $.ajax({
         url: root + 'data-list-bugs',
         type: 'get',
+        data: 'bug_type=' + bugType,
         dataType: 'json',
         success: function(result){
 
             if(result.message.indexOf('not logged')>-1) {
-                //window.location.replace(root);
-                //return;
+                window.location.replace(root);
+                return;
             }
 
             var table = getBugTable(result);
@@ -22,6 +29,32 @@ function getBugs(){
 
                 $("#table-data").html(table);
                 $('#bug-table').DataTable();
+
+                $('.change_status').click(function (e) {
+                    currentBugId = $(this).attr('rel');
+                    $('#popup_status').modal();
+                    return false;
+                });
+
+                $("input[name='btn-cancel-status']").click(function(){
+                    $.modal.close();
+                });
+
+                $("input[name='btn-change-status']").click(function(){
+                    var status = $("input[name='bug_status']").val();
+
+                    var data = 'id=' + currentBugId + '&status=' + status;
+
+                    $.ajax({
+                        url: root + 'change-bug-status',
+                        data: data,
+                        type: 'post',
+                        success: function(result){
+                            getBugs();
+                            $.modal.close();
+                        }
+                    });
+                });
             }
             else
                 $("#table-data").html("No bugs found");
@@ -63,7 +96,7 @@ function getBugTable(data){
             str += '<a href="' + root + 'bug-detail/' + bug.id + '" title="View detail"><img class="icon" src="' + root + 'public/images/view-comments.png"/></a>';
             str += '&nbsp;&nbsp;&nbsp;';
             str += '&nbsp;&nbsp;&nbsp;';
-            str += '<a href="' + root + 'list-bugs/' + bug.id + '" title="Change status"><img class="icon" src="' + root + 'public/images/change-status.jpg"/></a>';
+            str += '<a href="javascript:void(0)" rel="' + bug.id + '" class="change_status" title="Change status"><img class="icon" src="' + root + 'public/images/change-status.jpg"/></a>';
             str += '</td>';
 
             str += '</tr>';

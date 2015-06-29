@@ -52,6 +52,18 @@
             </tr>
         </table>
 
+        <?php
+            if(isset($userBugs) && count($userBugs)>0){
+
+                echo "<br/><br/><b>Bugs you are assigned on</b><br/><br/>";
+
+                $i = 0;
+                foreach($userBugs as $userBug){
+                    ++$i;
+                    echo "$i. <a href='$root/bug-detail/$userBug->id'>" . $userBug->bug->title . "</a><br/><br/>";
+                }
+            }
+        ?>
     </div>
 </div>
 

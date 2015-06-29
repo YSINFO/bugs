@@ -15,8 +15,10 @@ class BugController extends BaseController {
 
         $projectId = Session::get('currentProject');
 
+        $users = User::all();
+
         if(isset($projectId))
-            return View::make('bugs.create')->with('projectId', $projectId);
+            return View::make('bugs.create')->with('projectId', $projectId)->with('users', $users);
         else
             return Redirect::to('/');
     }
@@ -40,7 +42,17 @@ class BugController extends BaseController {
         $bug->save();
 
         $files = Input::file('file');
-        $fileCount = count($files);
+        if(isset($files))
+            $fileCount = count($files);
+        else
+            $fileCount = 0;
+
+        $users = Input::get('users');
+
+        if(isset($users))
+            $userCount = count($users);
+        else
+            $userCount = 0;
 
         if($fileCount>0){
             foreach($files as $file) {
@@ -59,6 +71,19 @@ class BugController extends BaseController {
                 $bugFile->status = 'active';
 
                 $bugFile->save();
+            }
+        }
+
+        if($userCount>0){
+
+            foreach($users as $userId){
+                $bugUser = new BugUser();
+
+                $bugUser->bug_id = $bug->id;
+                $bugUser->user_id = $userId;
+                $bugUser->status = 'active';
+
+                $bugUser->save();
             }
         }
 
@@ -104,6 +129,33 @@ class BugController extends BaseController {
             $bug->save();
 
             echo 'done';
+        }
+        else
+            echo 'invalid';
+    }
+
+    function changeBugStatus(){
+
+        $userId = Session::get('userId');
+        if(!isset($userId))
+            return "not logged";
+
+        $id = Input::get('id');
+
+        $bug = Bug::find($id);
+
+        if($bug){
+
+            $status = Input::get('status');
+
+            if(isset($status)) {
+                $bug->status = Input::get('status');
+                $bug->save();
+
+                echo 'done';
+            }
+            else
+                echo 'invalid';
         }
         else
             echo 'invalid';
@@ -179,14 +231,15 @@ class BugController extends BaseController {
             if(isset($projectId)){
 
                 $bug = Bug::find($bugId);
+                $project = Project::find($projectId);
 
-                if(isset($bug)){
+                if(isset($bug) && isset($project)){
                     Session::put('currentBugId', $bugId);
 
                     $bugFiles = BugFile::where('bug_id', '=', $bugId)->get();
 
                     return View::make('bugs.detail')
-                        ->with('projectId', $projectId)
+                        ->with('project', $project)
                         ->with('bug', $bug)
                         ->with('bugFiles', $bugFiles);
                 }
@@ -230,8 +283,10 @@ class BugController extends BaseController {
 
         $projectId = Session::get('currentProject');
 
+        $bugType = Input::get('bug_type');
+
         if(isset($projectId)){
-            $bugs = Bug::where('project_id', '=', $projectId)->get();
+            $bugs = Bug::where('project_id', '=', $projectId)->where('status','=',$bugType)->get();
 
             if($bugs && count($bugs)>0)
                 return json_encode(array('found' => true, 'bugs' => $bugs->toArray(), 'message' => 'logged'));

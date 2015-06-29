@@ -19,12 +19,15 @@ class UserController extends BaseController {
         $fixedBugs = Bug::where('status', '=', 'fixed')->count();
         $unresolvedBugs = Bug::where('status', '=', 'unresolved')->count();
 
+        $userBugs = BugUser::where('user_id', '=', $userId)->where('status', '=', 'active')->get();
+
         return View::make('users.user-section')
                 ->with('runningProjects', $runningProjects)
                 ->with('closedProjects', $closedProjects)
                 ->with('currentBugs', $currentBugs)
                 ->with('fixedBugs', $fixedBugs)
-                ->with('unresolvedBugs', $unresolvedBugs);
+                ->with('unresolvedBugs', $unresolvedBugs)
+                ->with('userBugs', $userBugs);
     }
 
     function createUser(){

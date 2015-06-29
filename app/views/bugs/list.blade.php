@@ -31,6 +31,12 @@
             <br/>
             <h1>Bug list</h1>
             <br/>
+
+            <label><input type="radio" name="bug_type" value="active" checked="checked"/>Active </label> &nbsp;&nbsp;
+            <label><input type="radio" name="bug_type" value="fixed"/>Fixed </label> &nbsp;&nbsp;
+            <label><input type="radio" name="bug_type" value="unresolved"/>Unresolved </label>
+
+            <br/><br/><br/>
         </div>
 
         <div id="table-data"></div>
@@ -39,6 +45,7 @@
 </div>
 
 @include('includes.footer')
+@include('includes.popup')
 
 </body>
 </html>

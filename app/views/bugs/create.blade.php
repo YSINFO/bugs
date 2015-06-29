@@ -54,6 +54,18 @@
                     </select>
                 </div>
 
+                <?php if(isset($users) && count($users)>0){?>
+                <div class="form-row">
+                    <select name="users[]" multiple="multiple" style="min-height: 50px; max-width: 300px">
+                        <?php
+                            foreach($users as $user){
+                                echo "<option value='" . $user->id . "'>" . $user->name . "</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
+                <?php } ?>
+
                 <br/>
 
                 <div class="form-row"><span class="add-file">Add attachment</span></div>

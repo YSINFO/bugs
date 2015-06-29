@@ -26,10 +26,14 @@
 
         <div class="header">
             <div class="form-row">
-                <a href="{{$root}}/list-bugs/{{$projectId}}">Back</a>
+                <a href="{{$root}}/list-bugs/{{$project->id}}">Back</a>
                 <br/>
             </div>
             <br/>
+
+            <div class="form-row">
+                Project: <b>{{$project->name}}</b><br/>
+            </div>
 
             <div class="form-row">
                 Posted by : {{$bug->user->name}}
@@ -79,13 +83,13 @@
                     <br/>
 
                     <div class="form-row file-container"></div>
-
                     <br/>
 
                     <input type="submit" name="btn-add-comment" value="Add comment"/>
                 </form>
                 <iframe id="ifr" name="ifr" style="width:1px;height:1px;visibility: hidden"></iframe>
             </div>
+
             <div class="form-row bug-comments"></div>
 
         </div>

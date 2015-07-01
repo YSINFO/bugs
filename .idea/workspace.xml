@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8bde55b4-8c9d-46de-a129-c4ade9881af6" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/users/create.js" afterPath="$PROJECT_DIR$/public/js/users/create.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="yogasmoga_bugs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/public/js/users/create.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.4940171" vertical-offset="306" max-vertical-offset="1190">
-              <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+              <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -820,7 +819,7 @@
     <entry file="file://$PROJECT_DIR$/public/js/users/create.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4940171" vertical-offset="306" max-vertical-offset="1190">
-          <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+          <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
           <folding />
         </state>
       </provider>

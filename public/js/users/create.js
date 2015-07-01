@@ -33,7 +33,7 @@ function createUser(){
 
             $(".message").html(result);
 
-            $("input[type='text'], textarea").val('');
+            $("input[type='text'], input[type='password'], textarea").val('');
         }
     })
 }

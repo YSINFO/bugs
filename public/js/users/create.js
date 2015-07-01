@@ -32,6 +32,8 @@ function createUser(){
             }
 
             $(".message").html(result);
+
+            $("input[type='text'], textarea").val('');
         }
     })
 }

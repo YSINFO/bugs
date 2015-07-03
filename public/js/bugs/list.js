@@ -30,18 +30,21 @@ function getBugs(){
                 $("#table-data").html(table);
                 $('#bug-table').DataTable();
 
+                $('.change_status').unbind('click');
                 $('.change_status').click(function (e) {
                     currentBugId = $(this).attr('rel');
                     $('#popup_status').modal();
                     return false;
                 });
 
+                $("input[name='btn-cancel-status']").unbind('click');
                 $("input[name='btn-cancel-status']").click(function(){
                     $.modal.close();
                 });
 
+                $("input[name='btn-change-status']").unbind('click');
                 $("input[name='btn-change-status']").click(function(){
-                    var status = $("input[name='bug_status']").val();
+                    var status = $("input[name='bug_status']:checked").val();
 
                     var data = 'id=' + currentBugId + '&status=' + status;
 

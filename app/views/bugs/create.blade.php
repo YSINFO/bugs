@@ -31,19 +31,21 @@
                 </div>
 
                 <br/>
-                <h1>Create bug</h1>
-                <br/>
+                <h1 class="form-header">Create bug</h1>
             </div>
 
             <div class="content">
+                <div class="form-label">Title</div>
                 <div class="form-row">
-                    <input name="title" class="input" placeholder="Bug title" type="text"/>
+                    <input name="title" class="input" type="text"/>
                 </div>
 
+                <div class="form-label">Description</div>
                 <div class="form-row">
-                    <textarea name="description" class="input" placeholder="Description of bug" rows="5"></textarea>
+                    <textarea name="description" class="input" rows="5"></textarea>
                 </div>
 
+                <div class="form-label">Bug Severity</div>
                 <div class="form-row">
                     <select name="severity">
                         <option>Blocker</option>
@@ -55,6 +57,7 @@
                 </div>
 
                 <?php if(isset($users) && count($users)>0){?>
+                <div class="form-label">Assign to</div>
                 <div class="form-row">
                     <select name="users[]" multiple="multiple" style="min-height: 50px; max-width: 300px">
                         <?php

@@ -23,6 +23,7 @@ function getUsers(){
                 $("#table-data").html(table);
                 $('#user-table').DataTable();
 
+                $(".remove-user").unbind('click');
                 $(".remove-user").click(function(){
                     var id = $(this).attr('rel');
 

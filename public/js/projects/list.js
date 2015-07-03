@@ -22,6 +22,16 @@ function getProjects(){
 
                 $("#table-data").html(table);
                 $('#project-table').DataTable();
+
+                $(".remove-project").unbind('click');
+                $(".remove-project").click(function(){
+                    var id = $(this).attr('rel');
+
+                    var row = $(this).closest('tr');
+
+                    removeProject(id, row);
+                });
+
             }
             else
                 $("#table-data").html("No projects found");
@@ -58,7 +68,11 @@ function getProjectTable(data){
             str += '<td>' + project.description + '</td>';
 
             str += '<td>';
-            str += '<a href="list-bugs/' + project.id + '">View bugs</a>';
+            str += '<a href="' + root + 'list-bugs/' + project.id + '" title="View bugs"><img class="icon" src="' + root + 'public/images/bug.jpg"/></a>';
+            str += '&nbsp;&nbsp;&nbsp;';
+            str += '<a href="' + root + 'edit-project/' + project.id + '" title="Edit project"><img class="icon" src="' + root + 'public/images/edit.png"/></a>';
+            str += '&nbsp;&nbsp;&nbsp;';
+            str += '<a href="javascript:void(0)" class="remove-project" rel="' + project.id + '" title="Remove project"><img class="icon" src="' + root + 'public/images/remove.png"/></a>';
             str += '</td>';
 
             str += '</tr>';
@@ -68,4 +82,22 @@ function getProjectTable(data){
 
         return str;
     }
+}
+
+function removeProject(id, row) {
+
+    if(!confirm("Are you sure to remove this project?"))
+        return;
+
+    $.ajax({
+        url: root + 'remove-project/' + id,
+        type: 'get',
+        success: function (result) {
+
+            if(result.indexOf('done')>-1)
+                getProjects();
+            else
+                alert("Invalid data provided");
+        }
+    });
 }

@@ -25,8 +25,12 @@
         <form id="form-user-profile" class="admin-section-form frm" onsubmit="return false">
 
             <div class="header">
+                <div>
+                    <a href="{{$root}}/list-users">User list</a> <br/>
+                </div>
+
                 <br/>
-                <h1>Update your profile</h1>
+                <h1 class="form-header">Update your profile</h1>
                 <br/>
             </div>
 

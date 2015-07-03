@@ -30,7 +30,7 @@
                 </div>
 
                 <br/>
-                <h1>Create a new user</h1>
+                <h1 class="form-header">Create a new user</h1>
                 <br/>
             </div>
 

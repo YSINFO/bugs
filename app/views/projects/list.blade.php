@@ -28,8 +28,9 @@
             <div>
                 <a href="{{$root}}/create-project">Create project</a>
             </div>
+
             <br/>
-            <h1>Project list</h1>
+            <h1 class="form-header">Project list</h1>
             <br/>
         </div>
 

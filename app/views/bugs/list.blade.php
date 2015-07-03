@@ -29,8 +29,7 @@
                 <a href="{{$root}}/create-bug">Create bug</a>
             </div>
             <br/>
-            <h1>Bug list</h1>
-            <br/>
+            <h1 class="form-header">Listing bugs</h1>
 
             <label><input type="radio" name="bug_type" value="active" checked="checked"/>Active </label> &nbsp;&nbsp;
             <label><input type="radio" name="bug_type" value="fixed"/>Fixed </label> &nbsp;&nbsp;

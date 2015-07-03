@@ -30,7 +30,7 @@
                 </div>
 
                 <br/>
-                <h1>Update this user</h1>
+                <h1 class="form-header">Update this user</h1>
                 <br/>
             </div>
 

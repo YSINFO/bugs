@@ -28,8 +28,10 @@
             <div>
                 <a href="{{$root}}/create-user">Create user</a>
             </div>
+
             <br/>
-            <h1>Users in system</h1>
+            <h1 class="form-header">Users in system</h1>
+            <br/>
         </div>
 
         <div id="table-data"></div>

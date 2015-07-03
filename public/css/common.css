@@ -2,6 +2,18 @@
 
 .form-row input[type='text'],.form-row input[type='password'],.form-row textarea,.form-row select{width: 80%;}
 
+.form-label{ padding: 10px 0; }
+
+.form-header{
+    padding: 0;
+    height: auto !important;
+    padding-bottom: 5px;
+    font-size: 14px;
+    border-bottom: solid 1px lightslategrey;
+    width: 150px;
+    margin-bottom: 20px;
+}
+
 input[type='text'],input[type='password'],textarea,select{ padding: 5px; }
 
 .icon{
@@ -23,3 +35,4 @@ a:hover{ color: #ff522a; }
 
 .center-text{ text-align: center; }
 .bug-image{ max-width: 400px; max-height: 400px; }
+

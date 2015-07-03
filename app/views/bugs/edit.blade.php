@@ -29,8 +29,7 @@
                     <img src="images/logo.png" style="" alt=""/>
                 </div>
                 <br/>
-                <h1>Administrator Login</h1>
-                <br/>
+                <h1 class="form-header">Edit bug</h1>
             </div>
 
             <div class="content">

@@ -49,6 +49,8 @@ class ProjectController extends BaseController {
 
         $project = Project::find($id);
 
+        Session::put('currentProjectId', $id);
+
         return View::make('projects.edit')->with('project', $project);
     }
 
@@ -58,18 +60,18 @@ class ProjectController extends BaseController {
         if(!isset($userId))
             return "not logged";
 
-        $id = Input::get('id');
+        $id = Session::get('currentProjectId');
 
         $project = Project::find($id);
 
         if($project){
 
-            $title = Input::get('title');
+            $name = Input::get('name');
             $description = Input::get('description');
             $status = Input::get('status');
 
-            if(isset($title))
-                $project->title = Input::get('title');
+            if(isset($name))
+                $project->name = Input::get('name');
 
             if(isset($description))
                 $project->description = Input::get('description');
@@ -85,13 +87,35 @@ class ProjectController extends BaseController {
             echo 'invalid';
     }
 
+    function removeProject($id){
+
+        if(isset($id)) {
+
+            $project = Project::find($id);
+
+            if(isset($project)){
+                $project->status = 'removed';
+
+                $project->save();
+
+                Bug::where('project_id', '=', $id)->update(array('status' => 'removed'));
+
+                echo 'done';
+            }
+            else
+                echo 'invalid';
+        }
+        else
+            echo 'invalid';
+    }
+
     function listProjects(){
 
         $userId = Session::get('userId');
         if(!isset($userId))
             return Redirect::to('/');
 
-        $projects = Project::all();
+        $projects = Project::where('status','=','active')->get();
 
         return View::make('projects.list')->with('projects', $projects);
     }
@@ -103,7 +127,7 @@ class ProjectController extends BaseController {
         if(!isset($userId))
             return json_encode(array('message' => 'not logged'));
 
-        $projects = Project::all();
+        $projects = Project::where('status','=','active')->get();
 
         if($projects && count($projects)>0)
             return json_encode(array('found' => true, 'projects' => $projects->toArray(), 'message' => 'logged'));

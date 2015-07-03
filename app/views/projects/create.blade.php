@@ -24,17 +24,23 @@
 
         <div style="margin-bottom: 20px;">
             <a href="{{$root}}/list-projects">Project list</a>
+
+            <br/><br/>
+            <h1 class="form-header">Create a new project</h1>
         </div>
 
-        <form id="form-project" class="admin-section-form frm" onsubmit="return false">
+        <form id="form-project" onsubmit="return false">
 
             <div class="content">
+
+                <div class="form-label">Project name</div>
                 <div class="form-row">
-                    <input id="name" name="name" class="input username" placeholder="Project name" type="text"/>
+                    <input id="name" name="name" class="input username" type="text"/>
                 </div>
 
+                <div class="form-label">Description</div>
                 <div class="form-row">
-                    <textarea id="description" name="description" class="input" placeholder="Description of project" rows="10"></textarea>
+                    <textarea id="description" name="description" class="input" rows="10"></textarea>
                 </div>
 
             </div>

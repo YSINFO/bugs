@@ -29,6 +29,7 @@ Route::get('/create-project', 'ProjectController@createProject');
 Route::post('/save-project', 'ProjectController@saveProject');
 Route::get('/edit-project/{id}', 'ProjectController@editProject');
 Route::post('/update-project', 'ProjectController@updateProject');
+Route::get('/remove-project/{id}', 'ProjectController@removeProject');
 Route::get('/list-projects', 'ProjectController@listProjects');
 
 Route::get('/create-bug', 'BugController@createBug');

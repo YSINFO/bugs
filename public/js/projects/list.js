@@ -68,7 +68,7 @@ function getProjectTable(data){
             str += '<td>' + project.description + '</td>';
 
             str += '<td>';
-            str += '<a href="' + root + 'list-bugs/' + project.id + '" title="View bugs"><img class="icon" src="' + root + 'public/images/bug.jpg"/></a>';
+            str += '<a href="' + root + 'list-bugs/' + project.id + '" title="View bugs"><img class="icon" src="' + root + 'public/images/bug.png"/></a>';
             str += '&nbsp;&nbsp;&nbsp;';
             str += '<a href="' + root + 'edit-project/' + project.id + '" title="Edit project"><img class="icon" src="' + root + 'public/images/edit.png"/></a>';
             str += '&nbsp;&nbsp;&nbsp;';

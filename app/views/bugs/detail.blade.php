@@ -53,7 +53,7 @@
             <?php
                 if(isset($bugFiles) && count($bugFiles)>0){
 
-                    $image_types= array('jpeg','jpg','gif','png');
+                    $image_types= array('jpeg','jpg','gif','png', 'pdf', 'doc', 'docx');
 
                     foreach($bugFiles as $bugFile){
 

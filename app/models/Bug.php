@@ -13,4 +13,8 @@ class Bug extends Eloquent {
     public function user(){
         return $this->belongsTo('User', 'created_by');
     }
+
+    public function project(){
+        return $this->belongsTo('Project', 'project_id');
+    }
 }

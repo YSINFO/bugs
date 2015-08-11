@@ -60,7 +60,10 @@
                 $i = 0;
                 foreach($userBugs as $userBug){
                     ++$i;
-                    echo "$i. <a href='$root/bug-detail/$userBug->id'>" . $userBug->bug->title . "</a><br/><br/>";
+
+                    $project = $userBug->bug->project;
+
+                    echo "<b>$i.</b> <u>$project->name</u> : <a href='$root/bug-detail/$userBug->id'>" . $userBug->bug->title . "</a><br/><br/>";
                 }
             }
         ?>

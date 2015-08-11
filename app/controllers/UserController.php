@@ -5,6 +5,7 @@ class UserController extends BaseController {
     function __construct(){
         View::share('root', URL::to('/'));
         View::share('name', Session::get('name'));
+        View::share('userType', Session::get('userType'));
     }
 
     function userSection(){

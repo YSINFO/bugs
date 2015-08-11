@@ -227,25 +227,18 @@ class BugController extends BaseController {
 
         if(isset($bugId)){
 
-            $projectId = Session::get('currentProject');
+            $bug = Bug::find($bugId);
+            $project = Project::find($bug->project_id);
 
-            if(isset($projectId)){
+            if(isset($bug) && isset($project)){
+                Session::put('currentBugId', $bugId);
 
-                $bug = Bug::find($bugId);
-                $project = Project::find($projectId);
+                $bugFiles = BugFile::where('bug_id', '=', $bugId)->get();
 
-                if(isset($bug) && isset($project)){
-                    Session::put('currentBugId', $bugId);
-
-                    $bugFiles = BugFile::where('bug_id', '=', $bugId)->get();
-
-                    return View::make('bugs.detail')
-                        ->with('project', $project)
-                        ->with('bug', $bug)
-                        ->with('bugFiles', $bugFiles);
-                }
-                else
-                    return Redirect::to('/');
+                return View::make('bugs.detail')
+                    ->with('project', $project)
+                    ->with('bug', $bug)
+                    ->with('bugFiles', $bugFiles);
             }
             else
                 return Redirect::to('/');

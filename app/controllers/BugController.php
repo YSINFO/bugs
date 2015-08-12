@@ -325,29 +325,28 @@ class BugController extends BaseController {
         $data['username'] = $username;
         $data['portal'] = $portal;
 
-        $result = Mail::send('emails.new-bug', $data, function($message) use ($email, $attachments)
-        {
+        $result = Mail::send('emails.new-bug', $data, function($message) use ($email, $attachments) {
             $message->to($email);
             $message->subject('New bug added at yogasmoga');
-            $message->from('BUGS@YOGASMOGA');
-Log::error('email = ' . $email);
-            if(isset($attachments) && count($attachments)>0) {
-
-                foreach($attachments as $attachment) {
-
-                    $mime = 'application/pdf';
-                    $as = 'pdf-report.zip';
-
-                    $message->attach($attachment,
-                                    array(
-                                        'as' => $as,
-                                        'mime' => $mime
-                                    )
-                            );
-                }
-            }
+            $message->from('info@yogasmoga.com');
         });
 
-        Log::error('result = ' . $result);
+//            if(isset($attachments) && count($attachments)>0) {
+//
+//                foreach($attachments as $attachment) {
+//
+//                    $mime = 'application/pdf';
+//                    $as = 'pdf-report.zip';
+//
+//                    $message->attach($attachment,
+//                                    array(
+//                                        'as' => $as,
+//                                        'mime' => $mime
+//                                    )
+//                            );
+//                }
+//            }
+//        });
+//
     }
 }

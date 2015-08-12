@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'BUGS@YOGASMOGA', 'name' => 'BUGS@YOGASMOGA'),
+	'from' => array('address' => 'info@yogasmoga.com', 'name' => 'BUGS@YOGASMOGA'),
 
 	/*
 	|--------------------------------------------------------------------------

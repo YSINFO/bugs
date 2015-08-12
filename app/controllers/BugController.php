@@ -85,6 +85,12 @@ class BugController extends BaseController {
                 $bugUser->status = 'active';
 
                 $bugUser->save();
+
+                $user = User::find($userId);
+                $project = Project::find($bug->project_id);
+
+                if(isset($user))
+                    $this->sendNewBugEmail($user->name, $user->email, $project, $bug->description, null);
             }
         }
 
@@ -309,5 +315,39 @@ class BugController extends BaseController {
         }
         else
             return json_encode(array('found' => false, 'message' => 'logged'));
+    }
+
+    public function sendNewBugEmail($username, $email, $project, $description, $attachments){
+        $portal = "BUGS@YOGASMOGA";
+
+        $data['project'] = $project;
+        $data['description'] = $description;
+        $data['username'] = $username;
+        $data['portal'] = $portal;
+
+        $result = Mail::send('emails.new-bug', $data, function($message) use ($email, $attachments)
+        {
+            $message->to($email);
+            $message->subject('New bug added at yogasmoga');
+            $message->from('BUGS@YOGASMOGA');
+Log::error('email = ' . $email);
+            if(isset($attachments) && count($attachments)>0) {
+
+                foreach($attachments as $attachment) {
+
+                    $mime = 'application/pdf';
+                    $as = 'pdf-report.zip';
+
+                    $message->attach($attachment,
+                                    array(
+                                        'as' => $as,
+                                        'mime' => $mime
+                                    )
+                            );
+                }
+            }
+        });
+
+        Log::error('result = ' . $result);
     }
 }

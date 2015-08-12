@@ -90,7 +90,7 @@ class BugController extends BaseController {
                 $project = Project::find($bug->project_id);
 
                 if(isset($user))
-                    $this->sendNewBugEmail($user->name, $user->email, $project, $bug->description, null);
+                    $this->sendNewBugEmail($user->name, $user->email, $project->name, $bug->description, null);
             }
         }
 
